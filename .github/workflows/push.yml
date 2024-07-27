@@ -59,7 +59,7 @@ jobs:
         run: git checkout ${{ inputs.myCommit }}
 
       - name: Switch usb-pd to specific commit  
-        run: cd source/Core/Drivers/usb-pd && git checkout 70a33648517862cbedb1a9367adad54d71157531 && cd ../../../../
+        run: cd source/Core/Drivers/usb-pd && git checkout feef71016cb3f3d5731f926c0d09b692aaaa9b7e && cd ../../../../
         
       - name: Git meta info
         run: echo "GITHUB_CI_PR_SHA=${{github.event.pull_request.head.sha}}" >> "${GITHUB_ENV}"
