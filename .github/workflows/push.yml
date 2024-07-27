@@ -10,12 +10,12 @@ on:
   #    - dev
   #    - main
   workflow_dispatch:
-  #  inputs:
-  #    myCommit:
-  #      description: 'Commit SHA1'
-  #      required: true
-  #      default: 'undefined'
-  #      type: string
+   inputs:
+     myCommit:
+       description: 'Commit SHA1'
+       required: true
+       default: 'undefined'
+       type: string
 
 jobs:
   build:
@@ -56,7 +56,7 @@ jobs:
         run: git config --global --add safe.directory /__w/IronOS/IronOS && git config --global safe.directory "$GITHUB_WORKSPACE"
 
       - name: Switch to specific commit
-        run: git checkout 6e2bca9
+        run: git checkout ${{ inputs.myCommit }}
         
       - name: Git meta info
         run: echo "GITHUB_CI_PR_SHA=${{github.event.pull_request.head.sha}}" >> "${GITHUB_ENV}"
@@ -70,10 +70,10 @@ jobs:
       - name: Generate json index file
         run: ./source/metadata.py ${{ matrix.model }}.json
 
-      - name: Archive ${{ matrix.model }} artifacts
+      - name: Archive ${{ matrix.model }}_${{ inputs.myCommit }} artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.model }}
+          name: ${{ matrix.model }}_${{ inputs.myCommit }}
           path: |
             source/Hexfile/${{ matrix.model }}_*.hex
             source/Hexfile/${{ matrix.model }}_*.dfu
