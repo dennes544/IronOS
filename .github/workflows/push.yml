@@ -8,12 +8,12 @@ on:
   #    - dev
   #    - main
   workflow_dispatch:
-    inputs:
-      myCommit:
-        description: 'Commit SHA1'
-        required: true
-        default: 'undefined'
-        type: string
+  #  inputs:
+  #    myCommit:
+  #      description: 'Commit SHA1'
+  #      required: true
+  #      default: 'undefined'
+  #      type: string
 
 jobs:
   build:
@@ -47,7 +47,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true
-          ref: ${{ inputs.myCommit }}
+          ref: dev/6e2bca9
+          fetch-depth: 0
           
 
       - name: Git ownership exception
