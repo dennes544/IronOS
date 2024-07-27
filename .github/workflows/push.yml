@@ -24,15 +24,15 @@ jobs:
       matrix:
         model:
           [
-            "TS100",
-            "TS80",
-            "TS80P",
-            "Pinecil",
-            "MHP30",
-            "Pinecilv2",
-            "S60",
-            "S60P",
-            "T55",
+            #"TS100",
+            #"TS80",
+            #"TS80P",
+            #"Pinecil",
+            #"MHP30",
+            #"Pinecilv2",
+            #"S60",
+            #"S60P",
+            #"T55",
             "TS101",
           ]
       fail-fast: true
@@ -47,9 +47,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true
-          ref: dev/6e2bca9
+          #ref: dev/6e2bca9
           fetch-depth: 0
-          
+
+      - name: Switch to specific commit
+        run: git checkout 6e2bca9
 
       - name: Git ownership exception
         run: git config --global --add safe.directory /__w/IronOS/IronOS && git config --global safe.directory "$GITHUB_WORKSPACE"
